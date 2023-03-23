@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { SECTION, SUBSECTION, SUBCOMPONENT, COMPONENT, SUPERSECTION, NEW, CANVAS, HIERARCHY, SUPERSECTION_SIZE } from "./constants";
+import { NEW, HIERARCHY } from "./constants";
 
 //--------------------------------Types------------------------------
 
@@ -97,7 +97,7 @@ export const canDropHelper = (dropZone: dropZoneProps, item: itemProps, availabl
       }
 
       // sidebar items can always be dropped anywhere
-      if (itemPath.length == 0) {
+      if (itemPath.length === 0) {
         return true;
       }
 
@@ -153,10 +153,9 @@ export const handleDropEvent = (layout: any, dropZone: dropZoneProps, item: item
 
   const insertJSONRecursive = (layout: any, i: number, target: number) => {
 
-    if(i != target) {
+    if(i !== target) {
 
       let layoutChildren = layout[dropZone.path[i]].children;
-      let layoutSize = layout[dropZone.path[i]].size;
 
       layout[dropZone.path[i]].children = insertJSONRecursive(layoutChildren, ++i, target);
       return layout;
@@ -164,22 +163,13 @@ export const handleDropEvent = (layout: any, dropZone: dropZoneProps, item: item
 
     let availableSize = dropZone.availableSize;
 
-    // if(item.size < availableSize)
-    //   availableSize = item.size;
-    
-    // //if not dropping at new supersection level
-    // if(target > 1) {
-    //   if(layout.length > 0)
-    //     availableSize-= layout.map(el => el.size).reduce((a,b) => {return a+b});
-    // }
-
-    return dropZone.modify == true? insertModify(layout, dropZone.path[dropZone.path.length-1], wrapItemRecursive(item, dropZone.type, availableSize))
+    return dropZone.modify === true? insertModify(layout, dropZone.path[dropZone.path.length-1], wrapItemRecursive(item, dropZone.type, availableSize))
     : insert(layout, dropZone.path[dropZone.path.length-1], wrapItemRecursive(item, dropZone.type, availableSize));
 
   }
 
   const removeJSONRecursive = (layout: any, i: number, target: number) => {
-    if(i != target) {
+    if(i !== target) {
       layout[item.path[i]].children = removeJSONRecursive(layout[item.path[i]].children, ++i, target);
       return layout;
     }

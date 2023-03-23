@@ -1,5 +1,3 @@
-import { DragEvent } from "react";
-
 export default interface IBuilderProps{
     
 }
