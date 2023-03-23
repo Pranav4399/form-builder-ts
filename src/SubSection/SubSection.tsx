@@ -73,19 +73,8 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
 
         return (
           <React.Fragment key={component.id}>
-            {(newLineflag == true) && <><DropZone
-              data={{
-                path: currentPath,
-                childrenCount: data.children.length,
-                type: COMPONENT,
-                availableSize: Math.max(availableSize, COMPONENT_MIN_SIZE)
-              }}
-              onDrop={handleDrop}
-              availableSize={Math.max(availableSize, COMPONENT_MIN_SIZE)}
-              className="horizontalDrag"
-            />
-            <div className="separator"></div>
-            </>}
+            {(newLineflag == true) && <><div className="separator"></div></>}
+            <div className="componentAtomContainer" style={{ flex: component.size/data.size }}>
             <DropZone
               data={{
                 path: currentPath,
@@ -122,10 +111,23 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
               availableSize={component.size/2}
               className="horizontalDrag"
             />}
+            <DropZone
+              data={{
+                path: siblingPath,
+                childrenCount: data.children.length,
+                type: COMPONENT,
+                availableSize: Math.max(availableSize, COMPONENT_MIN_SIZE)
+              }}
+              onDrop={handleDrop}
+              availableSize={Math.max(availableSize, COMPONENT_MIN_SIZE)}
+              className="horizontalDrag"
+            />
+            </div>
+            
           </React.Fragment>
         );
       })}
-      <DropZone
+      {(availableSize > 0) && <DropZone
           style={{ flex: availableSize / data.size }}
           data={{
             path: [...path, data.children.length],
@@ -136,7 +138,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
           onDrop={handleDrop}
           availableSize={Math.max(availableSize, COMPONENT_MIN_SIZE)}
           className="horizontalDrag"
-          isLast />
+          isLast />}
       </div>
     </div>
   );

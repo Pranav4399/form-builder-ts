@@ -1,6 +1,7 @@
+
+
 import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
-
 //Importing Constants
 import { COMPONENT, CANVAS } from "../Helpers/constants";
 
@@ -26,13 +27,13 @@ const Component:React.FC<IComponentProps> = ({ data, path, subSectionSize }) => 
 
 
   return (
-    <div
-      ref={ref}
-      style={{ opacity, flex: data.size/subSectionSize }}
-      className="component draggable"
-    >
-      <div>{data.id}{' '}{data.size}</div>
-    </div>
+      <div
+        ref={ref}
+        style={{ opacity, flex: 1 }}
+        className="component draggable"
+      >
+        <div>{data.id}{' '}{data.size}</div>
+      </div>
   );
 };
 export default Component;
