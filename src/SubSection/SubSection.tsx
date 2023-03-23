@@ -1,9 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
+
+//Importing constants
 import { COMPONENT_MIN_SIZE, COMPONENT, SUBSECTION, CANVAS } from "../Helpers/constants";
+
+//Importing Components
 import DropZone from "../DropZone/DropZone";
 import Component from "../Component/Component";
+
+//Importing Helper functions
 import { getAvailableSize } from "../Helpers/helpers";
+
+//Importing types file
 import ISubsectionProps from "./types";
 
 const style = {};

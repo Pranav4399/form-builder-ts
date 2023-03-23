@@ -1,10 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
-import { SECTION, SUPERSECTION_SIZE } from "../Helpers/constants";
+
+//Importing Constants
+import { SECTION, SUPERSECTION_SIZE, SUBSECTION, CANVAS } from "../Helpers/constants";
+
+//Importing Components
 import DropZone from "../DropZone/DropZone";
 import SubSection from "../SubSection/SubSection";
-import { SUBSECTION, CANVAS } from "../Helpers/constants";
+
+//Importing Helper functions
 import { getAvailableSize } from "../Helpers/helpers";
+
+//Importing types file
 import ISectionProps from "./types";
 
 const Section:React.FC<ISectionProps> = ({ data, handleDrop, path }) => {

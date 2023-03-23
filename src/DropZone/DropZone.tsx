@@ -1,8 +1,14 @@
-import React, { DragEvent } from "react";
+import React from "react";
 import { useDrop } from "react-dnd";
 import classNames from "classnames";
+
+//Importing Constants
 import { COMPONENT, SIDEBAR_ITEM, SECTION, SUBSECTION } from "../Helpers/constants";
+
+//Importing Types file
 import IDropZoneProps, { itemProps } from "./types";
+
+//Importing Helper functions
 import { canDropHelper } from "../Helpers/helpers";
 
 const ACCEPTS = [SIDEBAR_ITEM, COMPONENT, SECTION, SUBSECTION];

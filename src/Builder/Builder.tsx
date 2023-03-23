@@ -1,12 +1,19 @@
-import React, { useState, useCallback, DragEvent } from "react";
+import React, { useState, useCallback } from "react";
 
+//Importing Components
 import DropZone from "../DropZone/DropZone"
 import SideBarItem from "../SideBarItem/SideBarItem";
 import Section from "../Section/Section";
+
+//Importing InitialData
 import initialData from "../Helpers/initial-data";
+
+//Importing Helper Functions
 import {
   handleDropEvent
 } from "../Helpers/helpers";
+
+//Importing Types file
 import IBuilderProps, { dropZoneProps, itemProps} from "./types";
 
 import { SIDEBAR_ITEMS, SUPERSECTION, SECTION, SUPERSECTION_SIZE } from "../Helpers/constants";
@@ -17,9 +24,6 @@ const Builder:React.FC<IBuilderProps> = () => {
   
   const handleDrop = useCallback(
     (dropZone: dropZoneProps, item: itemProps) => {
-      console.log(dropZone);
-      console.log(item);
-
       setLayout([...handleDropEvent(layout, dropZone, item)]);
       return;
     },

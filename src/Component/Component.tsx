@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
+
+//Importing Constants
 import { COMPONENT, CANVAS } from "../Helpers/constants";
+
+//Importing types file
 import IComponentProps from "./types";
 
 const Component:React.FC<IComponentProps> = ({ data, path, subSectionSize }) => {
