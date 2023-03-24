@@ -89,7 +89,7 @@ export const insertModify = (arr: childrenProps[], index: number, newItem: itemP
     }
     return [
       // part of the array before the specified index
-      ...arr.slice(0, index - 1),
+      ...arr.slice(0, index),
       // inserted item
       newItem,
       // modified item
