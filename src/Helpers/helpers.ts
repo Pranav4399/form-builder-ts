@@ -65,26 +65,38 @@ export const insert = (arr: childrenProps[], index: number, newItem: itemProps) 
 ];
 
 export const insertModify = (arr: childrenProps[], index: number, newItem: itemProps) => {
-  let predecessor = arr.slice(0, index)[0];
-  let successor = arr.slice(index)[0];
-  if(predecessor) {
-    newItem.size = predecessor.size = predecessor.size/2;
+  let itemToModify = arr[index];
+    newItem.size = itemToModify.size = itemToModify.size/2;
+    if(index == 0) {
+      return [
+        // inserted item
+        newItem,
+        // modified item
+        itemToModify,
+        // part of the array after the specified index
+        ...arr.slice(index + 1)
+        ];
+    }
+    if(index == arr.length - 1) {
+      return [
+        // part of the array before the specified index
+        ...arr.slice(0, index),
+        // inserted item
+        newItem,
+        // modified item
+        itemToModify
+        ];
+    }
     return [
-    // part of the array before the specified index
-    predecessor,
-    // inserted item
-    newItem
+      // part of the array before the specified index
+      ...arr.slice(0, index - 1),
+      // inserted item
+      newItem,
+      // modified item
+      itemToModify,
+      // part of the array after the specified index
+      ...arr.slice(index + 1)
     ];
-  }
-  else {
-    newItem.size = successor.size = successor.size/2;
-    return [
-    // inserted item
-    newItem,
-    // part of the array after the specified index
-    successor
-    ];
-  }
   
 };
 
