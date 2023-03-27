@@ -37,13 +37,12 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
   const opacity = isDragging ? 0 : 1;
   drag(ref);
 
-  const renderComponent = (component: any, currentPath: number[], subSectionSize: number) => {
+  const renderComponent = (component: any, currentPath: number[]) => {
     return (
       <Component
         key={component.id}
         data={component}
         path={currentPath}
-        subSectionSize={subSectionSize}
       />
     );
   };
@@ -73,7 +72,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
 
         return (
           <React.Fragment key={component.id}>
-            {(newLineflag == true) && <><DropZone
+            {(newLineflag === true) && <><DropZone
               data={{
                 path: currentPath,
                 childrenCount: data.children.length,
@@ -109,7 +108,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
               availableSize={component.size/2}
               className="horizontalDrag"
             />}
-            {renderComponent(component, currentPath, data.size)}
+            {renderComponent(component, currentPath)}
             {(component.size>3) && <DropZone
               data={{
                 path: siblingPath,

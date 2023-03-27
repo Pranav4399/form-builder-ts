@@ -6,10 +6,9 @@ export default interface IComponentProps{
         component: {
             type: string,
             content: string
-    }
-    }
-    path: number[];    
-    subSectionSize: number
+        }
+    },
+    path: number[],    
 }
 
 
