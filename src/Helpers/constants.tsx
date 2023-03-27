@@ -1,4 +1,7 @@
 import shortid from "shortid";
+import Button from "./Components/Button";
+import Textbox from "./Components/Textbox";
+import Label from "./Components/Label";
 
 export const SIDEBAR_ITEM = "sidebarItem";
 export const SUPERSECTION = "supersection";
@@ -20,8 +23,29 @@ export const SIDEBAR_ITEMS = [
     type: COMPONENT,
     path: [],
     component: {
-      type: "Input",
-      content: "Some input"
+      type: "Button",
+      content: <Button />
     }
+    
+  },
+  {
+    id: shortid.generate(),
+    type: COMPONENT,
+    path: [],
+    component: {
+      type: "Textbox",
+      content: <Textbox />
+    }
+    
+  },
+  {
+    id: shortid.generate(),
+    type: COMPONENT,
+    path: [],
+    component: {
+      type: "Label",
+      content: <Label />
+    }
+    
   }
 ];
