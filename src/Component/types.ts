@@ -8,8 +8,7 @@ export default interface IComponentProps{
             content: string
     }
     }
-    path: number[];    
-    subSectionSize: number
+    path: number[]
 }
 
 
