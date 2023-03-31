@@ -37,6 +37,13 @@ interface getAvailableSizeData{
     children: childrenProps[]
 }
 
+// a little function to help us with resizing the result
+export const resize = (arr: childrenProps[], index: number, updatedSize: number) => {
+
+  arr[index].size = updatedSize;
+
+  return arr;
+};
 
 
 // a little function to help us with reordering the result
@@ -199,3 +206,18 @@ export const handleDropEvent = (layout: any, dropZone: dropZoneProps, item: item
 }
 
 export const  getAvailableSize = (data: getAvailableSizeData) => (data.size - data.children.reduce((a: number, b) => a + b.size, 0));
+
+export const handleResizeEvent = (layout: any, itemPath: number[], updatedSize: number) => {
+  console.log('here');
+
+  const handleResizeRecursive = (layout: any, i: number, target: number) => {
+    if(i!=target) {
+      layout[itemPath[i]].children = handleResizeRecursive(layout[itemPath[i]].children, ++i, target);
+      return layout;
+    }
+
+    return resize(layout, itemPath[i], updatedSize)
+  }
+
+  return handleResizeRecursive(layout, 0, itemPath.length-1);
+}

@@ -112,6 +112,7 @@ body {
   padding: 0.5rem 1rem;
   background-color: white;
   cursor: move;
+  z-index: 1;
 }
 
 .sectionContainer,.componentContainer {
@@ -168,4 +169,31 @@ body {
     background-color: red;
     display: block;
   }
+}
+
+.resizable-box {
+  background-color: red;
+  position: absolute;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.react-resizable-handle-w,
+.react-resizable-handle-e {
+  top: 50%;
+  margin-top: -10px;
+  cursor: ew-resize;
+  background-color: white;
+}
+
+.react-resizable-handle-w {
+  left: 0;
+}
+
+.react-resizable-handle-e {
+  right: 0;
 }

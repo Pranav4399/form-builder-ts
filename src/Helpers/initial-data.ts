@@ -1,6 +1,8 @@
 import { COMPONENT, SUPERSECTION, SECTION, SUBSECTION } from "./constants";
 
 const initialData = {
+  data: {
+  },
   layout: [
     {
       type: SUPERSECTION,

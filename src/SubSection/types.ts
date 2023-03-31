@@ -7,9 +7,12 @@ export default interface ISubsectionProps{
         size: number,
         children: childrenProps[]
     },
-    handleDrop:  (...args: any[]) => void, //Error will get resolved if we give any type or this will work - (...args: any[]) => void;
+    handleDrop:  (...args: any[]) => void,
+    handleResize:  (...args: any[]) => void, //Error will get resolved if we give any type or this will work - (...args: any[]) => void;
     path: number[],
     sectionSize: number,
+    allowDrag: boolean,
+    setAllowDrag: (args: boolean) => void,
     style?: React.CSSProperties,
     isLast?: boolean,
 }

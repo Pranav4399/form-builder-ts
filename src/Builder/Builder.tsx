@@ -10,7 +10,7 @@ import initialData from "../Helpers/initial-data";
 
 //Importing Helper Functions
 import {
-  handleDropEvent
+  handleDropEvent, handleResizeEvent
 } from "../Helpers/helpers";
 
 //Importing Types file
@@ -21,10 +21,24 @@ import { SIDEBAR_ITEMS, SUPERSECTION, SECTION, SUPERSECTION_SIZE } from "../Help
 const Builder:React.FC<IBuilderProps> = () => {
   const initialLayout = initialData.layout;
   const [layout, setLayout] = useState(initialLayout);
+  const [allowDrag, setAllowDrag] = useState(true);
   
   const handleDrop = useCallback(
     (dropZone: dropZoneProps, item: itemProps) => {
       setLayout([...handleDropEvent(layout, dropZone, item)]);
+      return;
+    },
+    [layout]
+  );
+
+  const handleResize = useCallback(
+    (newSize: number, oldSize: number, oldJSONSize: number, itemPath: number[]) => {
+
+      const newJSONSize = oldJSONSize * (newSize/oldSize);
+
+      setLayout([...handleResizeEvent(layout, itemPath, newJSONSize)]);
+
+      setAllowDrag(true);
       return;
     },
     [layout]
@@ -36,6 +50,9 @@ const Builder:React.FC<IBuilderProps> = () => {
         key={section.id}
         data={section}
         handleDrop={handleDrop}
+        handleResize={handleResize}
+        allowDrag={allowDrag}
+        setAllowDrag={setAllowDrag}
         path={currentPath}
       />
     );

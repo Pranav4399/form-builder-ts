@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 
 //Importing constants
@@ -13,15 +13,30 @@ import { getAvailableSize } from "../Helpers/helpers";
 
 //Importing types file
 import ISubsectionProps from "./types";
+import { Resizable, ResizableBox } from "react-resizable";
 
 const style = {};
-const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, sectionSize }) => {
+const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, handleResize, allowDrag, setAllowDrag, path, sectionSize }) => {
   const ref = useRef(null);
   //Calling the function that adds all the component's size and subtracts it from the subsection's size to find the available size inside the subsection
   let availableSize = getAvailableSize(data);
 
+  
+  const [dimensions, setDimensions] = 
+    useState({ width: 0, height: 0 });
+    useEffect(() => {
+      if (refContainer.current) {
+        setDimensions({
+          width: refContainer.current.offsetWidth,
+          height: refContainer.current.offsetHeight,
+        });
+      }
+    }, []);
+
+
   const [{ isDragging }, drag] = useDrag({
     type: SUBSECTION,
+    canDrag: allowDrag,
     item: {
       type: SUBSECTION,
       id: data.id,
@@ -43,6 +58,8 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
         key={component.id}
         data={component}
         path={currentPath}
+        allowDrag={allowDrag}
+        setAllowDrag={setAllowDrag}
         subSectionSize={subSectionSize}
       />
     );
@@ -51,6 +68,8 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
   let cummulativeSize = 0;
   let newLineflag = false;
 
+  const refContainer = useRef<HTMLDivElement>(null);
+
   return (
     <div
       ref={ref}
@@ -58,7 +77,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
       className="base draggable subSection"
     >
       <div className="subSectionLabel">{data.id}{' '}{data.size}</div>
-      <div className="componentContainer">
+      <div className="componentContainer" ref={refContainer}>
       {data.children.map((component, index) => {
         newLineflag = false;
 
@@ -122,6 +141,13 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, path, section
                 availableSize={Math.max(availableSize, COMPONENT_MIN_SIZE)}
                 className="horizontalDrag"
               />
+              <ResizableBox className="resizable-box" width={dimensions.width*(component.size/data.size)} height={dimensions.height}
+              maxConstraints={[dimensions.width, dimensions.height]}
+              minConstraints={[dimensions.width*(2/data.size), dimensions.height]}
+              draggableOpts={{grid: [dimensions.width*(2/data.size), 0]}}
+              resizeHandles={['e','w']}
+              onResizeStart={(event, {node, size, handle}) => setAllowDrag(false)}
+              onResizeStop={(event, {node, size, handle}) => {handleResize(size.width, dimensions.width, data.size, currentPath)}}></ResizableBox>
               </div>
           </React.Fragment>
         );

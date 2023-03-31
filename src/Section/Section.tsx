@@ -14,7 +14,7 @@ import { getAvailableSize } from "../Helpers/helpers";
 //Importing types file
 import ISectionProps from "./types";
 
-const Section:React.FC<ISectionProps> = ({ data, handleDrop, path }) => {
+const Section:React.FC<ISectionProps> = ({ data, handleDrop, handleResize, allowDrag, setAllowDrag, path }) => {
   const ref = useRef(null);
 
   //Calling the function that adds all the subsection's size and subtracts it from the section's size to find the available size inside the section
@@ -22,6 +22,7 @@ const Section:React.FC<ISectionProps> = ({ data, handleDrop, path }) => {
 
   const [{ isDragging }, drag] = useDrag({
     type: SECTION,
+    canDrag: allowDrag,
     item: {
       type: SECTION,
       id: data.id,
@@ -34,7 +35,7 @@ const Section:React.FC<ISectionProps> = ({ data, handleDrop, path }) => {
       isDragging: monitor.isDragging()
     })
   });
-
+  
   const opacity = isDragging ? 0 : 1;
   drag(ref);
 
@@ -44,6 +45,9 @@ const Section:React.FC<ISectionProps> = ({ data, handleDrop, path }) => {
         key={subSection.id}
         data={subSection}
         handleDrop={handleDrop}
+        handleResize={handleResize}
+        allowDrag={allowDrag}
+        setAllowDrag={setAllowDrag}
         path={currentPath}
         sectionSize={sectionSize}
       />

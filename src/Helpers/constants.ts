@@ -25,3 +25,7 @@ export const SIDEBAR_ITEMS = [
     }
   }
 ];
+
+export const draggableOpts = {
+  
+}

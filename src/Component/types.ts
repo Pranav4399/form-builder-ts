@@ -6,9 +6,11 @@ export default interface IComponentProps{
         component: {
             type: string,
             content: string
-    }
-    }
-    path: number[];    
+        }
+    },
+    path: number[],
+    allowDrag: boolean,
+    setAllowDrag: (args: boolean) => void,
     subSectionSize: number
 }
 

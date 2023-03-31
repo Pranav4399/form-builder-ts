@@ -8,11 +8,12 @@ import { COMPONENT, CANVAS } from "../Helpers/constants";
 //Importing types file
 import IComponentProps from "./types";
 
-const Component:React.FC<IComponentProps> = ({ data, path, subSectionSize }) => {
+const Component:React.FC<IComponentProps> = ({ data, path, allowDrag, setAllowDrag, subSectionSize }) => {
   const ref = useRef(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: COMPONENT,
+    canDrag: allowDrag,
     item: { type: COMPONENT, 
             id: data.id,
             path: path,
