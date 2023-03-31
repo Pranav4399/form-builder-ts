@@ -74,7 +74,7 @@ export const insert = (arr: childrenProps[], index: number, newItem: itemProps) 
 export const insertModify = (arr: childrenProps[], index: number, newItem: itemProps) => {
   let itemToModify = arr[index];
     newItem.size = itemToModify.size = itemToModify.size/2;
-    if(index == 0) {
+    if(index === 0) {
       return [
         // inserted item
         newItem,
@@ -84,7 +84,7 @@ export const insertModify = (arr: childrenProps[], index: number, newItem: itemP
         ...arr.slice(index + 1)
         ];
     }
-    if(index == arr.length - 1) {
+    if(index === arr.length - 1) {
       return [
         // part of the array before the specified index
         ...arr.slice(0, index),

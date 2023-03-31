@@ -1,5 +1,3 @@
-
-
 import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
 //Importing Constants
@@ -34,6 +32,7 @@ const Component:React.FC<IComponentProps> = ({ data, path, allowDrag, setAllowDr
         className="component draggable"
       >
         <div>{data.id}{' '}{data.size}</div>
+        <div>{data.component?.content}</div>
       </div>
   );
 };

@@ -5,7 +5,7 @@ export default interface ISideBarItemProps{
         type: string,
         component: {
             type: string,
-            content: string
+            content: React.ReactNode
         }
     } 
 }

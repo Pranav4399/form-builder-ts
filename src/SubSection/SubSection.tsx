@@ -52,7 +52,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, handleResize,
   const opacity = isDragging ? 0 : 1;
   drag(ref);
 
-  const renderComponent = (component: any, currentPath: number[], subSectionSize: number) => {
+  const renderComponent = (component: any, currentPath: number[]) => {
     return (
       <Component
         key={component.id}
@@ -92,7 +92,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, handleResize,
 
         return (
           <React.Fragment key={component.id}>
-            {(newLineflag == true) && <><div className="separator"></div></>}
+            {(newLineflag === true) && <><div className="separator"></div></>}
               <div className="componentAtomContainer" style={{ flex: component.size/data.size }}>
               <DropZone
                 data={{
@@ -117,7 +117,7 @@ const SubSection:React.FC<ISubsectionProps> = ({ data, handleDrop, handleResize,
                 availableSize={component.size/2}
                 className="horizontalDrag"
               />}
-              {renderComponent(component, currentPath, data.size)}
+              {renderComponent(component, currentPath)}
               {(component.size>3) && <DropZone
                 data={{
                   path: currentPath,
